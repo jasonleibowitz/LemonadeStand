@@ -11,9 +11,9 @@ import UIKit
 
 class LemonadeStand {
     var walletBalance = 10
-    var lemonsInInventory = 5
+    var lemonsInInventory = 0
     var lemonsInLemonade = 0
-    var iceInInventory = 3
+    var iceInInventory = 0
     var iceInLemonade = 0
     var day = 1
     
@@ -55,6 +55,44 @@ class LemonadeStand {
     func returnIce() {
         iceInInventory -= 1
         walletBalance += 1
+    }
+    
+    func calculateDailyProfits() -> (profits:Int, customers: Int) {
+        var daysProfits = 0
+        var lemonadeAcidityRatio:Double = (Double(lemonsInLemonade) / Double(iceInLemonade))
+        println("lemonade acidity ratio: \(lemonadeAcidityRatio)")
+        
+        // Initialize number of customers
+        var randomNumberOfCustomers = Int(arc4random_uniform(UInt32(10)))
+        println("customer: \(randomNumberOfCustomers)")
+        
+        // Initialize customer preference array
+        var customerPreferenceArray:Array<Double> = []
+        for (var i = randomNumberOfCustomers; i > 0; --i) {
+            customerPreferenceArray.append(Double(arc4random()) / Double(0x100000000))
+        }
+        println("customer preference ratio: \(customerPreferenceArray)")
+        println("customer pref count - \(customerPreferenceArray.count)")
+        
+        // Calculate sales
+        for (var j = 0; j < customerPreferenceArray.count; ++j) {
+            if customerPreferenceArray[j] < 0.4 && lemonadeAcidityRatio > 1 {
+                daysProfits += 1
+            } else if ((customerPreferenceArray[j] >= 0.4 && customerPreferenceArray[j] <= 0.6) && lemonadeAcidityRatio == 1) {
+                daysProfits += 1
+            } else if customerPreferenceArray[j] > 0.6 && lemonadeAcidityRatio < 1 {
+                daysProfits += 1
+            }
+        }
+        
+        // update currentGame variables
+        
+        walletBalance += daysProfits
+        lemonsInLemonade = 0
+        iceInLemonade = 0
+        day += 1
+        
+        return (daysProfits, randomNumberOfCustomers)
     }
     
 }

@@ -27,7 +27,7 @@ class ViewController: UIViewController, DataEnteredDelegate {
         walletBalanceLabel.text = "\(currentGame.walletBalance)"
         numberOfLemonsInInventoryLabel.text = "\(currentGame.lemonsInInventory)"
         numberofIceCubesInInventoryLabel.text = "\(currentGame.iceInInventory)"
-        
+        updateLabels()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -57,7 +57,24 @@ class ViewController: UIViewController, DataEnteredDelegate {
     // Main Page Actions
     @IBAction func goToStoreButtonPressed(sender: UIButton) {
     }
+    
     @IBAction func startDayButtonPressed(sender: UIButton) {
+        if (currentGame.lemonsInLemonade == 0 && currentGame.iceInLemonade > 0) {
+            showAlertWithText(header: "Hold On There Cowboy", message: "Are You Trying to sell water? Add some lemons before you try to open for the day.")
+        } else if (currentGame.lemonsInLemonade > 0 && currentGame.iceInLemonade == 0) {
+            showAlertWithText(header: "When Life Gives You Lemons", message: "Apparently you try to sell pure lemon juice to people. Add some ice to make lemonade.")
+        } else if (currentGame.lemonsInLemonade == 0 && currentGame.iceInLemonade == 0) {
+            showAlertWithText(header: "Famous Snake Oil", message: "Unless you want to get run out of town add some ingredients so you're not trying to sell nothing.")
+        } else {
+            var (profits, customers) = currentGame.calculateDailyProfits()
+            updateLabels()
+            if (currentGame.walletBalance < 3 && currentGame.lemonsInInventory == 0 && currentGame.iceInLemonade == 0) {
+                showAlertWithGameOverButton(header: "Game Over", message: "Unfortunately you don't have enough money to buy anything else.")
+                println("Game over")
+            } else {
+                showAlertWithText(header: "Sales Report", message: "\(customers) customers visited you today and you made \(profits) sales earning a profit of $\(profits).")
+            }
+        }
     }
     @IBAction func addLemonToLemonadeButtonPressed(sender: UIButton) {
         if currentGame.lemonsInInventory >= 1 {
@@ -94,9 +111,27 @@ class ViewController: UIViewController, DataEnteredDelegate {
     
     func showAlertWithText(header: String = "Warning", message: String) {
         var alert = UIAlertController(title: header, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil ))
         self.presentViewController(alert, animated: true, completion: nil)
     }
+    
+    func showAlertWithGameOverButton(header: String = "Warning", message: String) {
+        var alert = UIAlertController(title: header, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Restart Game", style: UIAlertActionStyle.Default, handler: {(action:UIAlertAction!) in
+            println("test")
+            self.resetGame()
+        }))
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func resetGame() {
+        currentGame.walletBalance = 10
+        currentGame.lemonsInInventory = 0
+        currentGame.iceInInventory = 0
+        currentGame.day = 1
+        updateLabels()
+    }
+
     
     func updateLabels() {
         numberOfLemonsInLemonadeLabel.text = "\(currentGame.lemonsInLemonade)"
@@ -104,6 +139,7 @@ class ViewController: UIViewController, DataEnteredDelegate {
         numberOfLemonsInInventoryLabel.text = "\(currentGame.lemonsInInventory)"
         numberofIceCubesInInventoryLabel.text = "\(currentGame.iceInInventory)"
         walletBalanceLabel.text = "$\(currentGame.walletBalance)"
+        dayLabel.text = "Day \(currentGame.day)"
     }
 
 }
