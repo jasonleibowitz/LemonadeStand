@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, DataEnteredDelegate {
 
     // Home Controller
     @IBOutlet weak var dayLabel: UILabel!
@@ -27,11 +27,31 @@ class ViewController: UIViewController {
         walletBalanceLabel.text = "\(currentGame.walletBalance)"
         numberOfLemonsInInventoryLabel.text = "\(currentGame.lemonsInInventory)"
         numberofIceCubesInInventoryLabel.text = "\(currentGame.iceInInventory)"
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "toStore" {
+            let svc = segue.destinationViewController as StoreViewController
+            svc.lemonsInInventory = currentGame.lemonsInInventory
+            svc.iceInInventory = currentGame.iceInInventory
+            svc.walletBalance = currentGame.walletBalance
+            svc.delegate = self
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // Delegate Function
+    
+    func userDidEnterInformation(lemonsInInventory: Int, iceInInventory: Int, walletBalance: Int) {
+        currentGame.lemonsInInventory = lemonsInInventory
+        currentGame.iceInInventory = iceInInventory
+        currentGame.walletBalance = walletBalance
+        updateLabels()
     }
     
     // Main Page Actions
@@ -83,7 +103,7 @@ class ViewController: UIViewController {
         numberOfIceCubesInLemonadeLabel.text = "\(currentGame.iceInLemonade)"
         numberOfLemonsInInventoryLabel.text = "\(currentGame.lemonsInInventory)"
         numberofIceCubesInInventoryLabel.text = "\(currentGame.iceInInventory)"
-        walletBalanceLabel.text = "\(currentGame.walletBalance)"
+        walletBalanceLabel.text = "$\(currentGame.walletBalance)"
     }
 
 }
