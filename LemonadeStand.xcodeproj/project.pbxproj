@@ -13,6 +13,9 @@
 		963C3D291A460845008F7449 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 963C3D281A460845008F7449 /* Images.xcassets */; };
 		963C3D2C1A460845008F7449 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 963C3D2A1A460845008F7449 /* LaunchScreen.xib */; };
 		963C3D381A460845008F7449 /* LemonadeStandTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963C3D371A460845008F7449 /* LemonadeStandTests.swift */; };
+		963C3D421A46447F008F7449 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963C3D411A46447F008F7449 /* StoreViewController.swift */; };
+		963C3D441A4644E2008F7449 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963C3D431A4644E2008F7449 /* Factory.swift */; };
+		963C3D461A466C1A008F7449 /* LemonadeStand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963C3D451A466C1A008F7449 /* LemonadeStand.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +39,9 @@
 		963C3D311A460845008F7449 /* LemonadeStandTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LemonadeStandTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		963C3D361A460845008F7449 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		963C3D371A460845008F7449 /* LemonadeStandTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LemonadeStandTests.swift; sourceTree = "<group>"; };
+		963C3D411A46447F008F7449 /* StoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
+		963C3D431A4644E2008F7449 /* Factory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
+		963C3D451A466C1A008F7449 /* LemonadeStand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LemonadeStand.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +85,9 @@
 			children = (
 				963C3D211A460845008F7449 /* AppDelegate.swift */,
 				963C3D231A460845008F7449 /* ViewController.swift */,
+				963C3D411A46447F008F7449 /* StoreViewController.swift */,
+				963C3D431A4644E2008F7449 /* Factory.swift */,
+				963C3D451A466C1A008F7449 /* LemonadeStand.swift */,
 				963C3D251A460845008F7449 /* Main.storyboard */,
 				963C3D281A460845008F7449 /* Images.xcassets */,
 				963C3D2A1A460845008F7449 /* LaunchScreen.xib */,
@@ -212,8 +221,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				963C3D461A466C1A008F7449 /* LemonadeStand.swift in Sources */,
+				963C3D441A4644E2008F7449 /* Factory.swift in Sources */,
 				963C3D241A460845008F7449 /* ViewController.swift in Sources */,
 				963C3D221A460845008F7449 /* AppDelegate.swift in Sources */,
+				963C3D421A46447F008F7449 /* StoreViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
