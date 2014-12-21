@@ -29,14 +29,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		963C3D1C1A460845008F7449 /* LemonadeStand.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LemonadeStand.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		963C3D1C1A460845008F7449 /* LemonadeStand.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LemonadeStand.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		963C3D201A460845008F7449 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		963C3D211A460845008F7449 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		963C3D231A460845008F7449 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		963C3D261A460845008F7449 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		963C3D281A460845008F7449 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		963C3D2B1A460845008F7449 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		963C3D311A460845008F7449 /* LemonadeStandTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "LemonadeStandTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		963C3D311A460845008F7449 /* LemonadeStandTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LemonadeStandTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		963C3D361A460845008F7449 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		963C3D371A460845008F7449 /* LemonadeStandTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LemonadeStandTests.swift; sourceTree = "<group>"; };
 		963C3D411A46447F008F7449 /* StoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
@@ -138,7 +138,7 @@
 			);
 			dependencies = (
 			);
-			name = "LemonadeStand";
+			name = LemonadeStand;
 			productName = LemonadeStand;
 			productReference = 963C3D1C1A460845008F7449 /* LemonadeStand.app */;
 			productType = "com.apple.product-type.application";
@@ -156,7 +156,7 @@
 			dependencies = (
 				963C3D331A460845008F7449 /* PBXTargetDependency */,
 			);
-			name = "LemonadeStandTests";
+			name = LemonadeStandTests;
 			productName = LemonadeStandTests;
 			productReference = 963C3D311A460845008F7449 /* LemonadeStandTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -362,7 +362,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = LemonadeStand/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "LemonadeStand";
+				PRODUCT_NAME = LemonadeStand;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -375,7 +375,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = LemonadeStand/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "LemonadeStand";
+				PRODUCT_NAME = LemonadeStand;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
@@ -394,7 +394,7 @@
 				);
 				INFOPLIST_FILE = LemonadeStandTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "LemonadeStandTests";
+				PRODUCT_NAME = LemonadeStandTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LemonadeStand.app/LemonadeStand";
 			};
 			name = Debug;
@@ -409,7 +409,7 @@
 				);
 				INFOPLIST_FILE = LemonadeStandTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "LemonadeStandTests";
+				PRODUCT_NAME = LemonadeStandTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LemonadeStand.app/LemonadeStand";
 			};
 			name = Release;
