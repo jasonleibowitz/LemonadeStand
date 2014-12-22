@@ -29,7 +29,7 @@ class StoreViewController: UIViewController {
         // Do any additional setup after loading the view.
         lemonsInInventoryLabel.text = "\(lemonsInInventory)"
         iceInInventoryLabel.text = "\(iceInInventory)"
-        walletBalanceLabel.text = "\(walletBalance)"
+        walletBalanceLabel.text = "$\(walletBalance)"
     }
 
     override func didReceiveMemoryWarning() {
@@ -88,7 +88,7 @@ class StoreViewController: UIViewController {
     }
     
     func updateLabels() {
-        walletBalanceLabel.text = "\(walletBalance)"
+        walletBalanceLabel.text = "$\(walletBalance)"
         lemonsInInventoryLabel.text = "\(lemonsInInventory)"
         iceInInventoryLabel.text = "\(iceInInventory)"
     }

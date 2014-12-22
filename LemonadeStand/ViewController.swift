@@ -18,6 +18,9 @@ class ViewController: UIViewController, DataEnteredDelegate {
     @IBOutlet weak var numberOfIceCubesInLemonadeLabel: UILabel!
     @IBOutlet weak var numberOfLemonsInInventoryLabel: UILabel!
     @IBOutlet weak var numberofIceCubesInInventoryLabel: UILabel!
+    @IBOutlet weak var yesterdayWeatherLabel: UILabel!
+    @IBOutlet weak var yesterdayWeatherImage: UIImageView!
+    @IBOutlet weak var lemonadeTasteDescriptionLabel: UILabel!
     
     var currentGame = LemonadeStand()
     
@@ -66,13 +69,46 @@ class ViewController: UIViewController, DataEnteredDelegate {
         } else if (currentGame.lemonsInLemonade == 0 && currentGame.iceInLemonade == 0) {
             showAlertWithText(header: "Famous Snake Oil", message: "Unless you want to get run out of town add some ingredients so you're not trying to sell nothing.")
         } else {
-            var (profits, customers) = currentGame.calculateDailyProfits()
+            var (profits, customers, weather) = currentGame.calculateDailyProfits()
             updateLabels()
             if (currentGame.walletBalance < 3 && currentGame.lemonsInInventory == 0 && currentGame.iceInLemonade == 0) {
-                showAlertWithGameOverButton(header: "Game Over", message: "Unfortunately you don't have enough money to buy anything else.")
+                showAlertWithGameOverButton(header: "Game Over", message: "Unfortunately you don't have enough money to buy anything else. You made it to \(currentGame.day) days.")
                 println("Game over")
             } else {
-                showAlertWithText(header: "Sales Report", message: "\(customers) customers visited you today and you made \(profits) sales earning a profit of $\(profits).")
+                var weatherString:String = ""
+                var weatherCustomers:String
+                var weatherVerb:String
+                switch weather {
+                case 0:
+                    weatherString = "cold"
+                    weatherCustomers = "3"
+                    weatherVerb = "less"
+                    yesterdayWeatherImage.image = UIImage(named: "Cold")
+                    yesterdayWeatherLabel.hidden = false
+                    yesterdayWeatherLabel.text = "Cold"
+                case 1:
+                    weatherString = "mild"
+                    weatherCustomers = "no"
+                    weatherVerb = "additional"
+                    yesterdayWeatherImage.image = UIImage(named: "Mild")
+                    yesterdayWeatherLabel.hidden = false
+                    yesterdayWeatherLabel.text = "Mild"
+                case 2:
+                    weatherString = "beautifully warm"
+                    weatherCustomers = "3"
+                    weatherVerb = "extra"
+                    yesterdayWeatherImage.image = UIImage(named: "Warm")
+                    yesterdayWeatherLabel.hidden = false
+                    yesterdayWeatherLabel.text = "Warm"
+                default:
+                    weatherString = "fair"
+                    weatherCustomers = "no"
+                    weatherVerb = "additional"
+                    yesterdayWeatherImage.image = UIImage(named: "Mild")
+                    yesterdayWeatherLabel.hidden = false
+                    yesterdayWeatherLabel.text = "Mild"
+                }
+                showAlertWithText(header: "Sales Report", message: "\(customers) customers visited you today and you made \(profits) sales earning a profit of $\(profits). The weather today was \(weatherString) so you had \(weatherCustomers) \(weatherVerb) customers.")
             }
         }
     }
@@ -80,6 +116,7 @@ class ViewController: UIViewController, DataEnteredDelegate {
         if currentGame.lemonsInInventory >= 1 {
             currentGame.increaseLemonsInLemonade()
             updateLabels()
+            calculateLemonadeFlavor()
         } else {
             showAlertWithText(header: "No More Lemons", message: "You have no lemons in your inventory. If you want to add more to the lemonade you have to purchase more in the store.")
         }
@@ -88,6 +125,7 @@ class ViewController: UIViewController, DataEnteredDelegate {
         if currentGame.lemonsInLemonade >= 1 {
             currentGame.decreaseLemonsInLemonade()
             updateLabels()
+            calculateLemonadeFlavor()
         } else {
             showAlertWithText(header: "No Lemons", message: "You can't remove lemons from a lemonade that doesn't have any lemons. Why don't you add some.")
         }
@@ -96,6 +134,7 @@ class ViewController: UIViewController, DataEnteredDelegate {
         if currentGame.iceInInventory >= 1 {
             currentGame.increaseIceInLemonade()
             updateLabels()
+            calculateLemonadeFlavor()
         } else {
             showAlertWithText(header: "Ice Is Nice", message: "Too bad you don't have any to add to the lemonade. Buy some more in the store.")
         }
@@ -104,6 +143,7 @@ class ViewController: UIViewController, DataEnteredDelegate {
         if currentGame.iceInLemonade >= 1 {
             currentGame.decreaseIceInLemonade()
             updateLabels()
+            calculateLemonadeFlavor()
         } else {
             showAlertWithText(header: "Iceless Lemonade", message: "There isn't any ice in the lemonade. You should probably add some.")
         }
@@ -124,6 +164,34 @@ class ViewController: UIViewController, DataEnteredDelegate {
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
+    func calculateLemonadeFlavor() {
+        if currentGame.lemonsInLemonade == 0 && currentGame.iceInLemonade == 0 {
+            // nothing added
+            lemonadeTasteDescriptionLabel.hidden = false
+            lemonadeTasteDescriptionLabel.text = "Empty"
+        } else if currentGame.lemonsInLemonade == 0 && currentGame.iceInLemonade > 0 {
+            // no lemons
+            lemonadeTasteDescriptionLabel.hidden = false
+            lemonadeTasteDescriptionLabel.text = "Just Ice"
+        } else if currentGame.lemonsInLemonade > 0 && currentGame.iceInLemonade == 0 {
+            // no ice
+            lemonadeTasteDescriptionLabel.hidden = false
+            lemonadeTasteDescriptionLabel.text = "Just Lemons"
+        } else {
+            var lemonadeAcidityRatio = (currentGame.lemonsInLemonade / currentGame.iceInLemonade)
+            var lemonadeFlavorProfile:String = ""
+            if lemonadeAcidityRatio > 1 {
+                lemonadeFlavorProfile = "Acidic"
+            } else if lemonadeAcidityRatio == 1 {
+                lemonadeFlavorProfile = "Balanced"
+            } else {
+                lemonadeFlavorProfile = "Diluted"
+            }
+            lemonadeTasteDescriptionLabel.hidden = false
+            lemonadeTasteDescriptionLabel.text = "\(lemonadeFlavorProfile)"
+        }
+    }
+    
     func resetGame() {
         currentGame.walletBalance = 10
         currentGame.lemonsInInventory = 0
@@ -140,6 +208,8 @@ class ViewController: UIViewController, DataEnteredDelegate {
         numberofIceCubesInInventoryLabel.text = "\(currentGame.iceInInventory)"
         walletBalanceLabel.text = "$\(currentGame.walletBalance)"
         dayLabel.text = "Day \(currentGame.day)"
+        lemonadeTasteDescriptionLabel.hidden = true
+        
     }
 
 }

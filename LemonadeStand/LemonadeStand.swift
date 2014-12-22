@@ -57,14 +57,31 @@ class LemonadeStand {
         walletBalance += 1
     }
     
-    func calculateDailyProfits() -> (profits:Int, customers: Int) {
+    func calculateDailyProfits() -> (profits:Int, customers: Int, weather:Int) {
         var daysProfits = 0
         var lemonadeAcidityRatio:Double = (Double(lemonsInLemonade) / Double(iceInLemonade))
         println("lemonade acidity ratio: \(lemonadeAcidityRatio)")
         
         // Initialize number of customers
         var randomNumberOfCustomers = Int(arc4random_uniform(UInt32(10)))
-        println("customer: \(randomNumberOfCustomers)")
+        println("random number of customers: \(randomNumberOfCustomers)")
+        
+        // Initialize random weather
+        var weather = Int(arc4random_uniform(UInt32(3)))
+        switch weather {
+        case 0: // cold weather
+            randomNumberOfCustomers -= 3
+            if randomNumberOfCustomers < 0 { randomNumberOfCustomers = 0 }
+            println("The weather today is cold. You have \(randomNumberOfCustomers) customers visiting you today.")
+        case 1: // fair weather
+            randomNumberOfCustomers += 0
+            println("The weather today is fair. No change in customers.")
+        case 2: // warm weather
+            randomNumberOfCustomers += 3
+            println("It's a beautifully warm day today. You now have \(randomNumberOfCustomers) customers")
+        default:
+            randomNumberOfCustomers += 0
+        }
         
         // Initialize customer preference array
         var customerPreferenceArray:Array<Double> = []
@@ -92,7 +109,7 @@ class LemonadeStand {
         iceInLemonade = 0
         day += 1
         
-        return (daysProfits, randomNumberOfCustomers)
+        return (daysProfits, randomNumberOfCustomers, weather)
     }
     
 }
